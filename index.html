@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="zh-cmn-Hans">
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+		<meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1">		
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+		<meta http-equiv="description" content="在线css三角" />
+		<meta name="description" content="在线css三角" />
+		<meta name="keywords" content="在线css三角" />
+		<meta name="author" content="ziven27,heartstar27@qq.com" />
+		<meta name="baidu-site-verification" content="mSgh5Wzaiu" />
+		<title>css angle</title>
+		<style>
+			html,button,input,select{ font-family: "Microsoft Yahei", "Helvetica Neue", Helvetica, Arial, sans-serif; }
+			body{ width: 100%; max-width:640px; margin: 0 auto; }
+			label{ display: block; }
+			table{ border-top: 1px solid #ddd; border-left: 1px solid #ddd; border-collapse: collapse; border-spacing: 0; clear: both; }
+			td,th{ padding: 4px 8px; border-right: 1px solid #ddd; border-bottom: 1px solid #ddd; }
+			tbody th{ text-align: right; }
+			table input{ margin-right: 5px; text-align: center;}
+			.box{ height: 200px; margin-bottom: 30px; }
+			.stage { float: left; *display: inline; margin-right: 20px; overflow: hidden; height: 100%; width: 200px; border: 1px solid #000; position: relative; }
+			.code-show h2{ margin: 0 0 10px; padding-top: 10px; }
+			.angle{ 
+				position: absolute; left: 0; right: 0; bottom: 0;  top: 0; margin: auto; 
+				width: 0; height: 0;
+				border-top: 30px dashed transparent;
+				border-bottom: 30px dashed transparent;
+				border-left: 30px solid green;
+				transition:all 0.3s;
+				-webkit-transition:all 0.3s;
+			}
+			.code-notes{ color: #999; }
+			.code-notes:before{ content: "/*"; }
+			.code-notes:after{ content: "*/"; }
+		</style>
+	</head>
+	<body>
+		<h1>在线css三角</h1>
+		<div class="box">
+			<div id="stage" class="stage">
+				<div id="angle" class="angle"></div>
+			</div>
+			<div class="code-show">
+				<h2>代码</h2>
+				<div>width:<span id="code1">0</span>px; </div>
+				<div>height:<span id="code2">0</span>px;</div>
+				<div id="codes1">boder-top:<span id="code3">30px dashed transparent</span>; </div>
+				<div id="codes2" class="code-notes">boder-right:<span id="code4">30px solid blue</span>; </div>
+				<div id="codes3">boder-bottom:<span id="code5">30px dashed transparent</span>; </div>
+				<div id="codes4">boder-left:<span id="code6">30px solid green</span>; </div>
+			</div>			
+		</div>
+		<p>修改以下输入框的值试试</p>		
+		<table>
+			<thead>
+				<tr>
+					<th>属性名</th>
+					<th>属性值</th>
+					<th>border-type</th>
+					<th>是否显示</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr>
+					<th>width:</th>
+					<td><input data-target="code1" id="fcWidth" name="width" type="number" min="0" max="100" step="1" value="0">px</td>
+					<td></td>
+					<td></td>
+				</tr>
+				<tr>
+					<th>height:</th>
+					<td><input data-target="code2" id="fcHeight" name="height" type="number" min="0" max="100" step="1" value="0">px</td>
+					<td></td>
+					<td></td>
+				</tr>
+				<tr class="operate-row" name="borderTop" data-target="code3">
+					<th>border-top: </th>
+					<td><input name="width" type="number" min="0" max="100" step="1" value="30">px</td>
+					<td><select name="color">
+							<option value="red">red</option>
+							<option value="transparent" selected="selected">transparent</option>
+						</select></td>
+					<td><input data-target="codes1" name="show" type="checkbox" checked="checked"></td>
+				</tr>
+				<tr class="operate-row" name="borderRight" data-target="code4">
+					<th>border-right: </th>
+					<td><input name="width" type="number" min="0" max="100" step="1" value="30">px</td>
+					<td><select name="color">
+							<option value="blue" selected="selected">blue</option>
+							<option value="transparent">transparent</option>
+						</select></td>
+					<td><input data-target="codes2"  type="checkbox" name="show"></td>
+				</tr>
+				<tr class="operate-row" name="borderBottom" data-target="code5">
+					<th>border-bottom:</th>
+					<td>
+						<input name="width" type="number" min="0" max="100" step="1" value="30">px</td>
+					<td><select name="color">
+							<option value="yellow">yellow</option>
+							<option value="transparent" selected="selected">transparent</option>
+						</select></td>
+					<td><input data-target="codes3" type="checkbox" name="show" checked="checked"></td>
+				</tr>
+				<tr class="operate-row" name="borderLeft" data-target="code6">
+					<th>border-left: </th>
+					<td><input name="width" type="number" min="0" max="100" step="1" value="30">px</td>
+					<td><select name="color">
+							<option value="green" selected="selected">green</option>
+							<option value="transparent">transparent</option>
+						</select></td>
+					<td><input data-target="codes4" type="checkbox" name="show" checked="checked"></td>
+				</tr>
+			</tbody>
+		</table>
+		<p>*IE6设定边框颜色为transparent的时候是黑色所以border-type需要设定为dashed。</p>
+		<script src="zepto.min.js"></script>
+		<script>
+			$(function() {
+				var _27 = {
+					init: function($angle) {
+						this.$angle = $angle;
+					},
+					//修改target值
+					getTarget: function($it) {
+						var target = $it.attr('data-target');
+						var $target = $('#' + target);
+						return $target;
+					},
+					//修改target值
+					changeTarget: function($it, val) {
+						var $target = this.getTarget($it);
+						$target.text(val);
+					},
+					//监听控件改变
+					fcWatch: function(id, attr) {
+						var _it = this;
+						var $angle = this.$angle;
+						$(id).on('change', function() {
+							var val = this.value;
+							_it.changeTarget($(this), val);
+							$angle.css(attr, val + 'px');
+						});
+					},
+					//修改一行
+					changeRow: function($row, isShow, $rowTarget) {
+						var _it = this;
+						var $angle = this.$angle;
+						var name = $row.attr('name');
+						if (!isShow) {
+							$angle.css(name, 'none 0');
+							$rowTarget.addClass('code-notes');
+							return false;
+						}
+						$rowTarget.removeClass('code-notes');
+						var width = $row.find('[name="width"]')[0].value;
+						var color = $row.find('[name="color"]')[0].value;
+						var type = color === 'transparent' ? 'dashed' : 'solid';
+						var value = width + 'px ' + type + ' ' + color;
+						$angle.css(name, value);
+						_it.changeTarget($row, value);
+					}
+				};
+				_27.init($('#angle'));
+				_27.fcWatch('#fcWidth', 'width');
+				_27.fcWatch('#fcHeight', 'height');
+				$('.operate-row').on('change', 'input, select', function() {
+					var $it = $(this);
+					var $label = $it.parents('tr');
+					var $show = $label.find('[name="show"]');
+					var $rowTarget = _27.getTarget($show);
+					var isShow = $show[0].checked;
+					_27.changeRow($label, isShow, $rowTarget);
+				});
+			});
+		</script>
+		<script>
+		var _hmt = _hmt || [];
+		(function() {
+		  var hm = document.createElement("script");
+		  hm.src = "//hm.baidu.com/hm.js?30709f8a251d3a53a8856096ebbb5882";
+		  var s = document.getElementsByTagName("script")[0]; 
+		  s.parentNode.insertBefore(hm, s);
+		})();
+		</script>
+	</body>
+</html>
