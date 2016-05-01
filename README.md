@@ -1,2 +1,2 @@
 # 在线css三角
-![image](/ziven27/cssAngle/blob/master/intro.png)
+![image](https://raw.githubusercontent.com/ziven27/cssAngle/master/intro.png)
